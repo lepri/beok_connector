@@ -18,7 +18,6 @@
 #                                                                            #
 ##############################################################################
 
-from openerp.osv import orm, fields
 from openerp.addons.connector.unit.mapper import mapping
 from openerp.addons.magentoerpconnect.product import ProductImportMapper
 from .backend import magento_beok
@@ -48,7 +47,7 @@ class BeOKProductImportMapper(ProductImportMapper):
         if not record.get('ncm'):
             return
         cr = self.session.cr
-        sql = """ SELECT * FROM account_product_fiscal_classification WHERE replace(name, '.', '') = '%s'; """ % record['ncm']
+        sql = """ SELECT * FROM account_product_fiscal_classification WHERE replace(name, '.', '') = '%s'; """ % record['ncm'].strip()
         cr.execute(sql)
         ncm_id = cr.dictfetchone()['id']
         if ncm_id:

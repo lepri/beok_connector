@@ -18,8 +18,8 @@
 #                                                                            #
 ##############################################################################
 
-import connector
 import backend
 import magento_model
 import partner
 import product
+#import sale

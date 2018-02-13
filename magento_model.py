@@ -18,14 +18,15 @@
 #                                                                            #
 ##############################################################################
 
-from openerp.osv import orm
+from openerp import models, api
 
 
-class magento_backend(orm.Model):
+class MagentoBackend(models.Model):
     _inherit = 'magento.backend'
-
-
-    def select_versions(self, cr, uid, context=None):
-        versions = super(magento_backend, self).select_versions(cr, uid, context=context)
+    
+    @api.model
+    def select_versions(self):
+        versions = super(MagentoBackend, self).select_versions()
         versions.append(('1.7-beok', '1.7 - BeOK'))
         return versions
+

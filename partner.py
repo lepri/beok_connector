@@ -23,7 +23,6 @@ from openerp.addons.connector.unit.mapper import mapping
 from openerp.addons.magentoerpconnect.partner import PartnerImportMapper, AddressImportMapper
 from .backend import magento_beok
 
-
 MAGENTO_GENDER = {'1': 'm',
                   '2': 'f'}
 
@@ -61,8 +60,6 @@ class BeOKPartnerImportMapper(PartnerImportMapper):
         else:
             return {'is_company': False}
 
-
-
     @mapping
     def names(self, record):
         parts = [part for part in (record['firstname'],
@@ -82,11 +79,13 @@ class BeOKPartnerImportMapper(PartnerImportMapper):
         cpf = record.get('cpf', None)
         cnpj = record.get('cnpj', None)
         if cpf:
+            cpf = cpf.strip()
             cpf = cpf.replace(".", "")
             cpf = cpf.replace("-", "")
             cpf = "%s.%s.%s-%s" % ( cpf[0:3], cpf[3:6], cpf[6:9], cpf[9:11] )
             return {"cnpj_cpf": cpf}
         if cnpj:
+            cnpj = cnpj.strip()
             cnpj = cnpj.replace(".", "")
             cnpj = cnpj.replace("-", "")
             cnpj = cnpj.replace("/", "")
